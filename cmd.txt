@@ -1,0 +1,1 @@
+node "C:\Users\orxan.hs\Documents\My Web Sites\AzerbaijanBankRates\app.js"

@@ -1,0 +1,12 @@
+html {
+	margin: 0;
+	padding: 0;
+}
+
+.container {
+	margin-top: 50px;
+}
+
+table, th {
+	text-align: center;
+}
