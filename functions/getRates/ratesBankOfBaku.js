@@ -11,9 +11,6 @@ module.exports = function ratesBankOfBaku(timestamp)
 	var req = http.request(options, function(res) {
 		var data = "";
 	  res.setEncoding('utf8');
-	  res.on('connect', function(){
-	  	console.log('connected');
-	  })
 	  res.on('data', function (chunk) {
 	  	data += chunk.toString();
 	  });

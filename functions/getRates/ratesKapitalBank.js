@@ -18,7 +18,6 @@ module.exports = function ratesKapitalBank(timestamp)
 			//console.log(string); id="bla(.|\s)*?<\/table>
 			var string = string.match(/id="bla(.|\s)*?<\/table>/);
 			var string = string[0].match(/\d{1,2}.*\d{4}/);
-			console.log(string[0]);
 			var date = string[0];
 
 			var string = data;
