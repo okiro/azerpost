@@ -28,7 +28,7 @@ var concatenateRates = require(__dirname + "/functions/concatenateRates");
 
 function GetRates(){ 
   var timestamp = formatDate(new Date());
-  var bob = ratesBankOfBaku(timestamp);
+  ratesBankOfBaku(timestamp);
   ratesKapitalBank(timestamp);  
   ratesIba(timestamp);
   ratesBanktechnique(timestamp);
@@ -36,5 +36,5 @@ function GetRates(){
   concatenateRates();
 }
 
-setInterval(GetRates(), 1000 * 60 * 10);
+setInterval(GetRates, 1000 * 60 * 10);
 

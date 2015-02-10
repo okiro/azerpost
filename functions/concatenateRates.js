@@ -18,7 +18,6 @@ module.exports = function concatenateRates()
 									fs.readFile(__dirname + "/rates.json", function (err, data) {
 									  if (err) throw err;
 								  	data = data.toString().replace(/\}\{/g, ",");
-								  	console.log(__dirname + '/../public/data/rates.json');
 							  		fs.writeFile(__dirname + '/../public/data/rates.json', data, {flag: 'w'}, function (err) {
 							  			if (err) throw err;
 							  		});
