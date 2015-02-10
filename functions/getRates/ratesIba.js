@@ -48,7 +48,7 @@ module.exports = function ratesIba(timestamp)
 
 				require('fs').writeFile(__dirname + "/../data/iba_rates.json", JSON.stringify(rates), function(err){
 					if (err) throw err;
-					  console.log('IBA rates are saved!');
+					  console.log(timestamp + '\tGetRates:\tIBA rates are saved!');
 				});
 
 		});

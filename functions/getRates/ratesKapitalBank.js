@@ -44,7 +44,7 @@ module.exports = function ratesKapitalBank(timestamp)
 
 			require('fs').writeFile(__dirname + "/../data/kapitalbank_rates.json", JSON.stringify(rates), function(err){
 				if (err) throw err;
-				  console.log('KapitalBank rates are saved!');
+				  console.log(timestamp + '\tGetRates:\tKapitalBank rates are saved!');
 			});				
 		});
 	});

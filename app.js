@@ -3,7 +3,6 @@
 var http = require('http');
 var formatDate = require(__dirname + "/functions/formatDate");
 var getContent = require(__dirname + "/functions/getContent");
-var log = require(__dirname + "/functions/logging");
 
 
 var server = http.createServer(function (request, response) {
@@ -11,7 +10,7 @@ var server = http.createServer(function (request, response) {
     getContent(request.url, response, __dirname);
   }
   request.on('end', function(){
-    console.log(formatDate(new Date()) + "\tReguest: " + request.method + " URL:" + request.url);
+    console.log(formatDate(new Date()) + "\tReguest:\t" + request.method + " URL:" + request.url);
 
   });
 }).listen(80);

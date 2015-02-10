@@ -45,7 +45,7 @@ module.exports = function ratesBankTechnique(timestamp)
 
 			require('fs').writeFile(__dirname + "/../data/banktechnique_rates.json", JSON.stringify(rates), function(err){
 				if (err) throw err;
-				  console.log('BankTechnique rates are saved!');
+				  console.log(timestamp + '\tGetRates:\tBankTechnique rates are saved!');
 			});				
 		});
 	});

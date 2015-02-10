@@ -1,6 +1,5 @@
 module.exports = function concatenateRates()
 {
-	console.log('concatenation started');
 	var fs = require('fs');
 	fs.unlink(__dirname + '/rates.json', function(err)
 	{
@@ -15,10 +14,11 @@ module.exports = function concatenateRates()
 						  if (err) throw err;
 						  fs.writeFile(__dirname + '/rates.json', data.toString(), {flag: 'a'}, function (err) {
 							  if (err) throw err;
-								if (index === 0) {
+								if (index === array.length - 1) {
 									fs.readFile(__dirname + "/rates.json", function (err, data) {
 									  if (err) throw err;
 								  	data = data.toString().replace(/\}\{/g, ",");
+								  	console.log(__dirname + '/../public/data/rates.json');
 							  		fs.writeFile(__dirname + '/../public/data/rates.json', data, {flag: 'w'}, function (err) {
 							  			if (err) throw err;
 							  		});

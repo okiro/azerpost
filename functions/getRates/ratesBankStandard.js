@@ -46,7 +46,7 @@ module.exports = function ratesBankStandard(timestamp)
 
 			require('fs').writeFile(__dirname + "/../data/bankstandard_rates.json", JSON.stringify(rates), function(err){
 				if (err) throw err;
-				  console.log('Bank Standard rates are saved!');
+				  console.log(timestamp + '\tGetRates:\tBank Standard rates are saved!');
 			});				
 		});
 	});
