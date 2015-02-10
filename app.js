@@ -11,11 +11,11 @@ var server = http.createServer(function (request, response) {
     getContent(request.url, response, __dirname);
   }
   request.on('end', function(){
-    // console.log(formatDate(new Date()) + "\tReguest: " + request.method + " URL:" + request.url);
+    console.log(formatDate(new Date()) + "\tReguest: " + request.method + " URL:" + request.url);
 
   });
-}).listen(3000);
-// console.log('Server running at http://127.0.0.1:8080/');
+}).listen(80);
+console.log('Server running at http://127.0.0.1:80/');
 // ----------------------------------------------
 
 // Rates query
@@ -34,7 +34,6 @@ function GetRates(){
   ratesIba(timestamp);
   ratesBanktechnique(timestamp);
   ratesBankStandard(timestamp);
-  if (bob === true) console.log("hello bob");
   concatenateRates();
 }
 

@@ -43,7 +43,6 @@ module.exports = function ratesBankOfBaku(timestamp)
 			require('fs').writeFile(__dirname + "/../data/bankofbaku_rates.json", JSON.stringify(rates), function(err){
 				if (err) throw err;
 				  console.log('Bank of Baku rates are saved!');
-				  return true;
 			});				
 		});
 	});
