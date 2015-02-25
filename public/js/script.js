@@ -4,6 +4,14 @@ $(document).ready(function() {
   $.getJSON('/data/rates.json', function(obj) {
 
     var data = [];
+    var type = ['buy', 'sell'];
+    var currency = ['usd', 'eur', 'gbp', 'rub'];
+    var classType = ['success', 'danger'];
+    var maxArray = {};
+    var minArray = {};
+    var max = 0;
+    var min = 1000;
+
     $.each(obj, function(bank, obj) {
       $.each(obj[1], function(key, val) {
         $('#' + bank + '_' + key).text(parseFloat(val).toFixed(4));
@@ -13,14 +21,6 @@ $(document).ready(function() {
         });
       });
     });
-
-    var type = ['buy', 'sell'];
-    var currency = ['usd', 'eur', 'gbp', 'rub'];
-    var maxArray = {};
-    var minArray = {};
-    var max = 0;
-    var min = 1000;
-    var classType = ['success', 'danger']
 
     $.each(type, function(key, type) {
       $.each(currency, function(key, currency) {
@@ -34,8 +34,6 @@ $(document).ready(function() {
         min = 1000;
       });
     });
-    // console.log(maxArray);
-    // console.log(minArray);
 
     $.each(maxArray, function(index, value) {
       $('td[id$=' + index + ']').each(function() {
@@ -60,5 +58,6 @@ $(document).ready(function() {
         }
       });
     });
+
   });
 });

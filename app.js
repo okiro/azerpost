@@ -24,6 +24,7 @@ var ratesBanktechnique = require(__dirname + '/functions/getRates/ratesBankTechn
 var ratesKapitalBank = require(__dirname + '/functions/getRates/ratesKapitalBank');
 var ratesBankStandard = require(__dirname + '/functions/getRates/ratesBankStandard');
 var ratesBankOfBaku = require(__dirname + '/functions/getRates/ratesBankOfBaku');
+var ratesUniBank = require(__dirname + '/functions/getRates/ratesUniBank');
 
 var concatenateRates = require(__dirname + '/functions/concatenateRates');
 
@@ -34,6 +35,7 @@ function GetRates() {
   ratesIba(timestamp);
   ratesBanktechnique(timestamp);
   ratesBankStandard(timestamp);
+  ratesUniBank(timestamp);
   concatenateRates();
 }
 
