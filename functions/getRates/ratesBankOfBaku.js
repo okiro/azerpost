@@ -20,7 +20,8 @@ module.exports = function ratesBankOfBaku(timestamp) {
 
 				var string = data;
 				string = string.match(/<div class="cur_bottom">(.|\s)*?<\/table>/);
-				string = string[0].match(/\d{1,2}\.\d{2,4}/g);
+				string = string[0].match(/\d{1,2}\.\d{1,4}/g);
+				console.log(string);
 				var rates = {
 					'bankofbaku': [{
 						'date': date,
