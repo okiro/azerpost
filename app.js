@@ -25,6 +25,7 @@ var ratesKapitalBank = require(__dirname + '/functions/getRates/ratesKapitalBank
 var ratesBankStandard = require(__dirname + '/functions/getRates/ratesBankStandard');
 var ratesBankOfBaku = require(__dirname + '/functions/getRates/ratesBankOfBaku');
 var ratesUniBank = require(__dirname + '/functions/getRates/ratesUniBank');
+var ratesAzerTurkBank = require(__dirname + '/functions/getRates/ratesAzerTurkBank');
 
 var concatenateRates = require(__dirname + '/functions/concatenateRates');
 
@@ -36,6 +37,7 @@ function GetRates() {
   ratesBanktechnique(timestamp);
   ratesBankStandard(timestamp);
   ratesUniBank(timestamp);
+  ratesAzerTurkBank(timestamp);
   concatenateRates();
 }
 

@@ -25,7 +25,7 @@ module.exports = function ratesIba(timestamp) {
 				// Rates table
 				string = data;
 				string = string.match(/<div class="rates">((.|\s)*?<\/div>){30}/);
-				string = string[0].match(/\d.\d{3,4}/g);
+				string = string[0].match(/\d\.\d{2,4}/g);
 				var rates = {
 					'iba': [{
 						'date': date,

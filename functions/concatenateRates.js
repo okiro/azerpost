@@ -3,9 +3,9 @@
 module.exports = function concatenateRates() {
 	var fs = require('fs');
 	fs.unlink(__dirname + '/rates.json', function(err) {
-		if (err) throw err;
+		if (err) console.log(err);
 		fs.unlink(__dirname + '/../public/data/rates.json', function(err) {
-			if (err) throw err;
+			if (err) console.log(err);
 			fs.readdir(__dirname + '/data', function(err, files) {
 				if (err) throw err;
 				files.forEach(function(currentValue, index, array) {
