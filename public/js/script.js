@@ -14,7 +14,7 @@ $(document).ready(function() {
 
     $.each(obj, function(bank, obj) {
       $.each(obj[1], function(key, val) {
-        $('#' + bank + '_' + key).text(parseFloat(val).toFixed(4));
+        if (parseFloat(val) !== 0) $('#' + bank + '_' + key).text(parseFloat(val).toFixed(4));
         data.push({
           type: key,
           value: parseFloat(val)

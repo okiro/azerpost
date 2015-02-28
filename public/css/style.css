@@ -7,6 +7,19 @@ html {
 	margin-top: 50px;
 }
 
-table, th {
+
+
+.table>thead>tr>td,
+.table>tbody>tr>td,
+.table>tfoot>tr>td {
+	vertical-align: top;
 	text-align: center;
+	border: 1px solid #000000;
+}
+
+.table>thead>tr>th,
+.table>tbody>tr>th{
+	border: 0px;
+	text-align: center;
+	vertical-align: middle;
 }
