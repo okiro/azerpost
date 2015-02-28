@@ -51,5 +51,9 @@ module.exports = function ratesIba(timestamp) {
 			}
 		});
 	});
+
+	req.on('error', function(e) {
+		console.error(e);
+	});
 	req.end();
 }

@@ -49,5 +49,9 @@ module.exports = function ratesBankTechnique(timestamp) {
 		});
 	});
 
+	req.on('error', function(e) {
+		console.error(e);
+	});
+
 	req.end();
 }

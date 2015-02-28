@@ -11,8 +11,7 @@ http.createServer(function(request, response) {
     getContent(request.url, response, __dirname);
   }
   request.on('end', function() {
-    console.log(formatDate(new Date()) + '\tReguest:\t' + request.method + ' URL:' + request.url);
-
+    // console.log(formatDate(new Date()) + '\tReguest:\t' + request.method + ' URL:' + request.url);
   });
 }).listen(80);
 console.log('Server running at http://127.0.0.1:80/');

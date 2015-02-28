@@ -46,6 +46,10 @@ module.exports = function ratesKapitalBank(timestamp) {
 				console.log(timestamp + '\tGetRates:\tKapitalBank rates ERROR ' + err);
 			}
 		});
+
+		req.on('error', function(e) {
+			console.error(e);
+		});
 	});
 
 	req.end();
