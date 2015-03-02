@@ -26,12 +26,12 @@ module.exports = function ratesAzerTurkBank(timestamp) {
 						'date': date,
 						'timestamp': timestamp
 					}, {
-						'buy_usd': string[2],
-						'buy_eur': string[4],
+						'buy_usd': string[4],
+						'buy_eur': string[6],
 						'buy_gbp': 0,
 						'buy_rub': 0,
-						'sell_usd': string[3],
-						'sell_eur': string[5],
+						'sell_usd': string[5],
+						'sell_eur': string[7],
 						'sell_gbp': 0,
 						'sell_rub': 0,
 					}]
