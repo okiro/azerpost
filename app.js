@@ -13,8 +13,8 @@ http.createServer(function(request, response) {
   request.on('end', function() {
     // console.log(formatDate(new Date()) + '\tReguest:\t' + request.method + ' URL:' + request.url);
   });
-}).listen(8080);
-console.log('Server running at http://',process.env.IP,':',process.env.PORT);
+}).listen(80);
+console.log('Server running at http://', process.env.IP,':',process.env.PORT);
 // ----------------------------------------------
 
 // Rates queryn
