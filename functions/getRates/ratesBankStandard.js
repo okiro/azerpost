@@ -48,7 +48,7 @@ module.exports = function ratesBankStandard(timestamp) {
 			} catch (err) {
 				console.log(timestamp + '\tGetRates:\tBank Standard rates ERROR ' + err);
 				require('fs').unlink(__dirname + '/../data/bankstandard_rates.json', function(err){
-					if (err.code !== 'ENOENT') console.log(err);
+					if (err) if (err.code !== 'ENOENT') console.log(err);
 				});					
 			}
 		});

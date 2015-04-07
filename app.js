@@ -43,9 +43,3 @@ function GetRates() {
 GetRates();
 
 setInterval(GetRates, 1000 * 60 * 10);
-
-require('fs').watch(__dirname + '/functions/data/', function (event, filename) {
-  if (event == 'change'){
-    //concatenateRates();
-  }
-});

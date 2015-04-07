@@ -44,7 +44,7 @@ module.exports = function ratesBankOfBaku(timestamp) {
 			} catch (err) {
 				console.log(timestamp + '\tGetRates:\tBank of Baku rates ERROR ' + err);
 				require('fs').unlink(__dirname + '/../data/bankofbaku_rates.json', function(err){
-					if (err.code !== 'ENOENT') console.log(err);
+					if (err) if (err.code !== 'ENOENT') console.log(err);
 				});				
 			}
 		});

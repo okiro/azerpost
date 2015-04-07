@@ -46,7 +46,7 @@ module.exports = function ratesBankTechnique(timestamp) {
 			} catch (err) {
 				console.log(timestamp + '\tGetRates:\tBankTechnique rates ERROR ' + err);
 				require('fs').unlink(__dirname + '/../data/banktechnique_rates.json', function(err){
-					if (err.code !== 'ENOENT') console.log(err);
+					if (err) if (err.code !== 'ENOENT') console.log(err);
 				});					
 			}
 		});
