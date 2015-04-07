@@ -42,7 +42,10 @@ module.exports = function ratesAzerTurkBank(timestamp) {
 					console.log(timestamp + '\tGetRates:\tAzerTurkBank rates are saved!');
 				});
 			} catch (err) {
-				console.log(timestamp + '\tGetRates:\ttAzerTurkBank rates ERROR ' + err);
+				console.log(timestamp + '\tGetRates:\tAzerTurkBank rates ERROR ' + err);
+				require('fs').unlink(__dirname + '/../data/azerturkbank_rates.json', function(err){
+					if (err.code !== 'ENOENT') console.log(err);
+				});
 			}
 		});
 	});

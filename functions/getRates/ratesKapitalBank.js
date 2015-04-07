@@ -44,6 +44,9 @@ module.exports = function ratesKapitalBank(timestamp) {
 				});
 			} catch (err) {
 				console.log(timestamp + '\tGetRates:\tKapitalBank rates ERROR ' + err);
+				require('fs').unlink(__dirname + '/../data/kapitalbank_rates.json', function(err){
+					if (err.code !== 'ENOENT') console.log(err);
+				});					
 			}
 		});
 

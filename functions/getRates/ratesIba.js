@@ -48,6 +48,9 @@ module.exports = function ratesIba(timestamp) {
 				});
 			} catch (err) {
 				console.log(timestamp + '\tGetRates:\tIBA rates ERROR ' + err);
+				require('fs').unlink(__dirname + '/../data/iba_rates.json', function(err){
+					if (err.code !== 'ENOENT') console.log(err);
+				});					
 			}
 		});
 	});

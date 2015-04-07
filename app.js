@@ -13,11 +13,11 @@ http.createServer(function(request, response) {
   request.on('end', function() {
     // console.log(formatDate(new Date()) + '\tReguest:\t' + request.method + ' URL:' + request.url);
   });
-}).listen(80);
-console.log('Server running at http://127.0.0.1:80/');
+}).listen(8080);
+console.log('Server running at http://',process.env.IP,':',process.env.PORT);
 // ----------------------------------------------
 
-// Rates query
+// Rates queryn
 var ratesIba = require(__dirname + '/functions/getRates/ratesIba');
 var ratesBanktechnique = require(__dirname + '/functions/getRates/ratesBankTechnique');
 var ratesKapitalBank = require(__dirname + '/functions/getRates/ratesKapitalBank');
@@ -43,3 +43,9 @@ function GetRates() {
 GetRates();
 
 setInterval(GetRates, 1000 * 60 * 10);
+
+require('fs').watch(__dirname + '/functions/data/', function (event, filename) {
+  if (event == 'change'){
+    //concatenateRates();
+  }
+});
