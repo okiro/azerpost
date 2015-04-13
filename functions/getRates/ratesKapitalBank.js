@@ -4,7 +4,7 @@ module.exports = function ratesKapitalBank(timestamp) {
 	var http = require('http');
 	var options = {
 		hostname: 'www.kapitalbank.az',
-		path: '/?/az/exchange/',
+		path: '/az/current-rates/',
 		method: 'GET'
 	}
 	var req = http.request(options, function(res) {
@@ -16,25 +16,25 @@ module.exports = function ratesKapitalBank(timestamp) {
 		res.on('end', function() {
 			var string = data;
 			try {
-				string = string.match(/id="bla(.|\s)*?<\/table>/);
-				string = string[0].match(/\d{1,2}.*\d{4}/);
+				string = string.match(/<div class="table">(.|\s)*?<\/div>/);
+				string = string[0].match(/\d{2}\.\d{2}\.\d{4}/);
 				var date = string[0];
 
 				string = data;
-				string = string.match(/\d\.\d{4}/g);
+				string = string.match(/\d{1}\.\d{4}/g);
 				var rates = {
 					'kapitalbank': [{
 						'date': date,
 						'timestamp': timestamp
 					}, {
-						'buy_usd': string[0],
-						'buy_eur': string[2],
-						'buy_gbp': string[6],
-						'buy_rub': string[4],
-						'sell_usd': string[1],
-						'sell_eur': string[3],
-						'sell_gbp': string[7],
-						'sell_rub': string[5]
+						'buy_usd': string[1],
+						'buy_eur': string[3],
+						'buy_gbp': string[7],
+						'buy_rub': string[5],
+						'sell_usd': string[2],
+						'sell_eur': string[4],
+						'sell_gbp': string[8],
+						'sell_rub': string[6]
 					}]
 				}
 
