@@ -4,7 +4,8 @@
 var http = require('http');
 var formatDate = require(__dirname + '/functions/formatDate');
 var getContent = require(__dirname + '/functions/getContent');
-
+var portNumber = parseInt(process.argv[2]);
+if (isNaN(portNumber)) portNumber = 8080;
 
 http.createServer(function(request, response) {
   if (request.method === 'GET') {
@@ -13,8 +14,8 @@ http.createServer(function(request, response) {
   request.on('end', function() {
     // console.log(formatDate(new Date()) + '\tReguest:\t' + request.method + ' URL:' + request.url);
   });
-}).listen(80);
-console.log('Server running at http://', process.env.IP,':',process.env.PORT);
+}).listen(portNumber);
+console.log('Server running at http://', process.env.IP,':', portNumber);
 // ----------------------------------------------
 
 // Rates queryn
