@@ -53,7 +53,10 @@ module.exports = function ratesUniBank(timestamp) {
 						}
 					}
 					else {
-						console.log(err);
+						require('fs').writeFile(__dirname + '/../data/unibank_rates.json', JSON.stringify(rates), function(err) {
+							if (err) throw err;
+							console.log(timestamp + '\tGetRates:\tUniBank rates are saved!');
+						});
 					}
 				});
 			}

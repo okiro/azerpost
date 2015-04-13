@@ -21,7 +21,7 @@ module.exports = function ratesKapitalBank(timestamp) {
 				var date = string[0];
 
 				string = data;
-				string = string.match(/<div class="table">(.|\s)*?<\/div>/);				
+				string = string.match(/<div class="table">(.|\s)*?<\/div>/);
 				string = string[0].match(/\d{1}\.\d{4}/g);
 				var rates = {
 					'kapitalbank': [{
@@ -55,14 +55,19 @@ module.exports = function ratesKapitalBank(timestamp) {
 						}
 					}
 					else {
-						console.log(err);
+						require('fs').writeFile(__dirname + '/../data/kapitalbank_rates.json', JSON.stringify(rates), function(err) {
+							if (err) throw err;
+							console.log(timestamp + '\tGetRates:\tKapitalBank rates are saved!');
+						});
 					}
 				});
-			} catch (err) {
+			}
+			catch (err) {
 				console.log(timestamp + '\tGetRates:\tKapitalBank rates ERROR ' + err);
-				require('fs').unlink(__dirname + '/../data/kapitalbank_rates.json', function(err){
-					if (err) if (err.code !== 'ENOENT') console.log(err);
-				});					
+				require('fs').unlink(__dirname + '/../data/kapitalbank_rates.json', function(err) {
+					if (err)
+						if (err.code !== 'ENOENT') console.log(err);
+				});
 			}
 		});
 

@@ -1,9 +1,10 @@
 /*jslint node: true, asi:true */
 'use strict';
+var url = require('url');
 module.exports = function ratesAzerTurkBank(timestamp) {
 	var http = require('http');
 	var options = {
-		hostname: 'www.azerturkbank.biz',
+		hostname: 'www.azerturkbank.az',
 		path: '/default.html',
 		method: 'GET'
 	};
@@ -53,13 +54,18 @@ module.exports = function ratesAzerTurkBank(timestamp) {
 						}
 					}
 					else {
-						console.log(err);
+						require('fs').writeFile(__dirname + '/../data/azerturkbank_rates.json', JSON.stringify(rates), function(err) {
+							if (err) throw err;
+							console.log(timestamp + '\tGetRates:\tAzerTurkBank rates are saved!');
+						});
 					}
 				});
-			} catch (err) {
+			}
+			catch (err) {
 				console.log(timestamp + '\tGetRates:\tAzerTurkBank rates ERROR ' + err);
-				require('fs').unlink(__dirname + '/../data/azerturkbank_rates.json', function(err){
-					if (err) if (err.code !== 'ENOENT') console.log(err);
+				require('fs').unlink(__dirname + '/../data/azerturkbank_rates.json', function(err) {
+					if (err)
+						if (err.code !== 'ENOENT') console.log(err);
 				});
 			}
 		});

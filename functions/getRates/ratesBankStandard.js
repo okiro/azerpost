@@ -57,7 +57,10 @@ module.exports = function ratesBankStandard(timestamp) {
 						}
 					}
 					else {
-						console.log(err);
+						require('fs').writeFile(__dirname + '/../data/bankstandard_rates.json', JSON.stringify(rates), function(err) {
+							if (err) throw err;
+							console.log(timestamp + '\tGetRates:\tBank Standard rates are saved!');
+						});
 					}
 				});
 			}
