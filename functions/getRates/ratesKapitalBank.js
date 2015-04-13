@@ -21,7 +21,8 @@ module.exports = function ratesKapitalBank(timestamp) {
 				var date = string[0];
 
 				string = data;
-				string = string.match(/\d{1}\.\d{4}/g);
+				string = string.match(/<div class="table">(.|\s)*?<\/div>/);				
+				string = string[0].match(/\d{1}\.\d{4}/g);
 				var rates = {
 					'kapitalbank': [{
 						'date': date,
