@@ -18,7 +18,7 @@ http.createServer(function(request, response) {
 console.log('Server running at http://', process.env.IP,':', portNumber);
 // ----------------------------------------------
 
-// Rates queryn
+// Rates query
 var ratesIba = require(__dirname + '/functions/getRates/ratesIba');
 var ratesBanktechnique = require(__dirname + '/functions/getRates/ratesBankTechnique');
 var ratesKapitalBank = require(__dirname + '/functions/getRates/ratesKapitalBank');
