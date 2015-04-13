@@ -2,12 +2,13 @@ html {
 	margin: 0;
 	padding: 0;
 }
-
 .container {
 	margin-top: 10px;
 }
-
-
+.date {
+	font-weight: normal;
+	font-style: italic;
+}
 .table>thead>tr>td,
 .table>tbody>tr>td,
 .table>tfoot>tr>td {
@@ -15,9 +16,8 @@ html {
 	text-align: center;
 	border: 1px solid #000000;
 }
-
 .table>thead>tr>th,
-.table>tbody>tr>th{
+.table>tbody>tr>th {
 	border: 0px;
 	text-align: center;
 	vertical-align: middle;

@@ -39,9 +39,24 @@ module.exports = function ratesKapitalBank(timestamp) {
 					}]
 				}
 
-				require('fs').writeFile(__dirname + '/../data/kapitalbank_rates.json', JSON.stringify(rates), function(err) {
-					if (err) throw err;
-					console.log(timestamp + '\tGetRates:\tKapitalBank rates are saved!');
+				require('fs').readFile(__dirname + '/../data/kapitalbank_rates.json', function(err, data) {
+					if (!err) {
+						var fileContent = JSON.parse(data.toString());
+						var oldData = JSON.stringify(fileContent.kapitalbank[1]);
+						var newData = JSON.stringify(rates.kapitalbank[1]);
+						if (oldData != newData) {
+							require('fs').writeFile(__dirname + '/../data/kapitalbank_rates.json', JSON.stringify(rates), function(err) {
+								if (err) throw err;
+								console.log(timestamp + '\tGetRates:\tKapitalBank rates are saved!');
+							});
+						}
+						else {
+							console.log(timestamp + '\tGetRates:\tKapitalBank rates has not been changed.');
+						}
+					}
+					else {
+						console.log(err);
+					}
 				});
 			} catch (err) {
 				console.log(timestamp + '\tGetRates:\tKapitalBank rates ERROR ' + err);

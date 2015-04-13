@@ -20,6 +20,10 @@ $(document).ready(function() {
           value: parseFloat(val)
         });
       });
+      $.each(obj[0], function(key, val) {
+          val = val.split(' ');
+          if (key === 'timestamp') $('#' + bank + '_date').text(val[0]);
+      });
     });
 
     $.each(type, function(key, type) {

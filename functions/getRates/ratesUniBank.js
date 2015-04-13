@@ -37,15 +37,32 @@ module.exports = function ratesUniBank(timestamp) {
 					}]
 				};
 
-				require('fs').writeFile(__dirname + '/../data/unibank_rates.json', JSON.stringify(rates), function(err) {
-					if (err) throw err;
-					console.log(timestamp + '\tGetRates:\tUniBank rates are saved!');
+				require('fs').readFile(__dirname + '/../data/unibank_rates.json', function(err, data) {
+					if (!err) {
+						var fileContent = JSON.parse(data.toString());
+						var oldData = JSON.stringify(fileContent.unibank[1]);
+						var newData = JSON.stringify(rates.unibank[1]);
+						if (oldData != newData) {
+							require('fs').writeFile(__dirname + '/../data/unibank_rates.json', JSON.stringify(rates), function(err) {
+								if (err) throw err;
+								console.log(timestamp + '\tGetRates:\tUniBank rates are saved!');
+							});
+						}
+						else {
+							console.log(timestamp + '\tGetRates:\tUniBank rates has not been changed.');
+						}
+					}
+					else {
+						console.log(err);
+					}
 				});
-			} catch (err) {
+			}
+			catch (err) {
 				console.log(timestamp + '\tGetRates:\tUniBank rates ERROR ' + err);
-				require('fs').unlink(__dirname + '/../data/unibank_rates.json', function(err){
-					if (err) if (err.code !== 'ENOENT') console.log(err);
-				});					
+				require('fs').unlink(__dirname + '/../data/unibank_rates.json', function(err) {
+					if (err)
+						if (err.code !== 'ENOENT') console.log(err);
+				});
 			}
 		});
 	});

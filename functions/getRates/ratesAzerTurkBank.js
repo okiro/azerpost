@@ -37,9 +37,24 @@ module.exports = function ratesAzerTurkBank(timestamp) {
 					}]
 				};
 
-				require('fs').writeFile(__dirname + '/../data/azerturkbank_rates.json', JSON.stringify(rates), function(err) {
-					if (err) throw err;
-					console.log(timestamp + '\tGetRates:\tAzerTurkBank rates are saved!');
+				require('fs').readFile(__dirname + '/../data/azerturkbank_rates.json', function(err, data) {
+					if (!err) {
+						var fileContent = JSON.parse(data.toString());
+						var oldData = JSON.stringify(fileContent.azerturkbank[1]);
+						var newData = JSON.stringify(rates.azerturkbank[1]);
+						if (oldData != newData) {
+							require('fs').writeFile(__dirname + '/../data/azerturkbank_rates.json', JSON.stringify(rates), function(err) {
+								if (err) throw err;
+								console.log(timestamp + '\tGetRates:\tAzerTurkBank rates are saved!');
+							});
+						}
+						else {
+							console.log(timestamp + '\tGetRates:\tAzerTurkBank rates has not been changed.');
+						}
+					}
+					else {
+						console.log(err);
+					}
 				});
 			} catch (err) {
 				console.log(timestamp + '\tGetRates:\tAzerTurkBank rates ERROR ' + err);

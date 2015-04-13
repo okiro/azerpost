@@ -37,15 +37,32 @@ module.exports = function ratesBankOfBaku(timestamp) {
 					}]
 				};
 
-				require('fs').writeFile(__dirname + '/../data/bankofbaku_rates.json', JSON.stringify(rates), function(err) {
-					if (err) throw err;
-					console.log(timestamp + '\tGetRates:\tBank of Baku rates are saved!');
+				require('fs').readFile(__dirname + '/../data/bankofbaku_rates.json', function(err, data) {
+					if (!err) {
+						var fileContent = JSON.parse(data.toString());
+						var oldData = JSON.stringify(fileContent.bankofbaku[1]);
+						var newData = JSON.stringify(rates.bankofbaku[1]);
+						if (oldData != newData) {
+							require('fs').writeFile(__dirname + '/../data/bankofbaku_rates.json', JSON.stringify(rates), function(err) {
+								if (err) throw err;
+								console.log(timestamp + '\tGetRates:\tBank of Baku rates are saved!');
+							});
+						}
+						else {
+							console.log(timestamp + '\tGetRates:\tBank of Baku rates has not been changed.');
+						}
+					}
+					else {
+						console.log(err);
+					}
 				});
-			} catch (err) {
+			}
+			catch (err) {
 				console.log(timestamp + '\tGetRates:\tBank of Baku rates ERROR ' + err);
-				require('fs').unlink(__dirname + '/../data/bankofbaku_rates.json', function(err){
-					if (err) if (err.code !== 'ENOENT') console.log(err);
-				});				
+				require('fs').unlink(__dirname + '/../data/bankofbaku_rates.json', function(err) {
+					if (err)
+						if (err.code !== 'ENOENT') console.log(err);
+				});
 			}
 		});
 	});
