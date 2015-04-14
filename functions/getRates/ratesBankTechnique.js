@@ -31,11 +31,11 @@ module.exports = function ratesBankTechnique(timestamp) {
 						'buy_usd': string[0],
 						'buy_eur': string[1],
 						'buy_gbp': string[2],
-						'buy_rub': string[3],
-						'sell_usd': string[4],
-						'sell_eur': string[5],
-						'sell_gbp': string[6],
-						'sell_rub': string[7]
+						'buy_rub': 0,
+						'sell_usd': string[3],
+						'sell_eur': string[4],
+						'sell_gbp': string[5],
+						'sell_rub': 0
 					}]
 				}
 
