@@ -1,5 +1,5 @@
 # NodeJS application for getting bank rates in Azerbaijan
-## website www.azrate.tk
+### website www.azrates.tk
 ## Application version v0.04
 
 
