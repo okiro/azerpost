@@ -4,7 +4,7 @@ module.exports = function ratesKapitalBank(timestamp) {
 	var http = require('http');
 	var options = {
 		hostname: 'www.kapitalbank.az',
-		path: '/az/current-rates/',
+		path: '/az/currency-rates/',
 		method: 'GET'
 	}
 	var req = http.request(options, function(res) {
