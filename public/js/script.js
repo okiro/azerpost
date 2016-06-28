@@ -24,6 +24,10 @@ $(document).ready(function() {
           val = val.split(' ');
           if (key === 'timestamp') $('#' + bank + '_date').text(val[0]);
       });
+      $.each(obj[0], function(key, val) {
+          val = val.split(' ');
+          if (key === 'timestamp') $('#' + bank + '_time').text(val[1]);
+      });      
     });
 
     $.each(type, function(key, type) {

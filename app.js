@@ -12,10 +12,10 @@ http.createServer(function(request, response) {
     getContent(request.url, response, __dirname);
   }
   request.on('end', function() {
-    // console.log(formatDate(new Date()) + '\tReguest:\t' + request.method + ' URL:' + request.url);
+    //console.log(formatDate(new Date()) + '\tReguest:\t' + request.method + ' URL:' + request.url);
   });
 }).listen(portNumber);
-console.log('Server running at http://', process.env.IP,':', portNumber);
+console.log('Server running at http://', process.env.IP, ':', portNumber);
 // ----------------------------------------------
 
 // Rates query
@@ -29,18 +29,49 @@ var ratesAzerTurkBank = require(__dirname + '/functions/getRates/ratesAzerTurkBa
 
 var concatenateRates = require(__dirname + '/functions/concatenateRates');
 
-function GetRates() {
+
+function getRates() {
+  
   var timestamp = formatDate(new Date());
-  ratesBankOfBaku(timestamp);
-  ratesKapitalBank(timestamp);
-  ratesIba(timestamp);
-  ratesBanktechnique(timestamp);
-  ratesBankStandard(timestamp);
-  ratesUniBank(timestamp);
-  ratesAzerTurkBank(timestamp);
-  concatenateRates();
+  ratesIba(timestamp, next1);
+  
+  function next1(){
+    var timestamp = formatDate(new Date());
+    ratesBanktechnique(timestamp, next2);
+  }
+  
+  function next2(){
+    var timestamp = formatDate(new Date());
+    ratesKapitalBank(timestamp, next3);
+  }
+  
+  function next3(){
+    var timestamp = formatDate(new Date());
+    ratesBankStandard(timestamp, next4);
+  }  
+  
+  function next4() {
+    var timestamp = formatDate(new Date());
+    ratesBankOfBaku(timestamp, next5);    
+  }
+  
+  function next5() {
+    var timestamp = formatDate(new Date());
+    ratesUniBank(timestamp, next6);    
+  }
+  
+  function next6() {
+    var timestamp = formatDate(new Date());
+    ratesAzerTurkBank(timestamp, concatenate);    
+  }  
+  
+  function concatenate(){
+     var timestamp = formatDate(new Date());
+    concatenateRates(timestamp);
+  }
+
+
 }
 
-GetRates();
-
-setInterval(GetRates, 1000 * 60 * 10);
+getRates();
+setInterval(getRates, 1000 * 60 * 10);

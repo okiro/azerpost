@@ -1,6 +1,6 @@
 /*jslint node: true, asi: true */
 'use strict';
-module.exports = function ratesBankTechnique(timestamp) {
+module.exports = function ratesBankTechnique(timestamp, callback) {
 	var http = require('http');
 	var options = {
 		hostname: 'banktechnique.az',
@@ -39,41 +39,20 @@ module.exports = function ratesBankTechnique(timestamp) {
 					}]
 				}
 
-				require('fs').readFile(__dirname + '/../data/banktechnique_rates.json', function(err, data) {
-					if (!err) {
-						var fileContent = JSON.parse(data.toString());
-						var oldData = JSON.stringify(fileContent.banktechnique[1]);
-						var newData = JSON.stringify(rates.banktechnique[1]);
-						if (oldData != newData) {
-							require('fs').writeFile(__dirname + '/../data/banktechnique_rates.json', JSON.stringify(rates), function(err) {
-								if (err) throw err;
-								console.log(timestamp + '\tGetRates:\tBankTechnique rates are saved!');
-							});
-						}
-						else {
-							console.log(timestamp + '\tGetRates:\tBankTechnique rates has not been changed.');
-						}
-					}
-					else {
-						require('fs').writeFile(__dirname + '/../data/banktechnique_rates.json', JSON.stringify(rates), function(err) {
-							if (err) throw err;
-							console.log(timestamp + '\tGetRates:\tBankTechnique rates are saved!');
-						});
-					}
-				});
+				var readFile = require(__dirname + '/ratesReadFile.js');
+				readFile('banktechnique', rates, timestamp, callback);
+				
 			}
 			catch (err) {
 				console.log(timestamp + '\tGetRates:\tBankTechnique rates ERROR ' + err);
-				// require('fs').unlink(__dirname + '/../data/banktechnique_rates.json', function(err) {
-				// 	if (err)
-				// 		if (err.code !== 'ENOENT') console.log(err);
-				// });
+				callback();
 			}
 		});
 	});
 
 	req.on('error', function(e) {
 		console.error(e);
+		callback();
 	});
 
 	req.end();

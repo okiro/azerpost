@@ -1,11 +1,11 @@
 /*jslint node: true, asi:true */
 'use strict';
 var url = require('url');
-module.exports = function ratesAzerTurkBank(timestamp) {
+module.exports = function ratesAzerTurkBank(timestamp, callback) {
 	var http = require('http');
 	var options = {
-		hostname: 'www.azerturkbank.az',
-		path: '/default.html',
+		hostname: 'azerturkbank.az',
+		path: '/services/currency/',
 		method: 'GET'
 	};
 
@@ -20,59 +20,37 @@ module.exports = function ratesAzerTurkBank(timestamp) {
 				var date = '';
 
 				var string = data;
-				string = string.match(/<table class="currency-table(.|\s)*?<\/table>/);
+				string = string.match(/<aside class="currencys">(.|\s)*?<\/table>/);
 				string = string[0].match(/\d{1,2}\.\d{2,4}/g);
 				var rates = {
 					'azerturkbank': [{
 						'date': date,
 						'timestamp': timestamp
 					}, {
-						'buy_usd': string[4],
-						'buy_eur': string[6],
-						'buy_gbp': 0,
+						'buy_usd': string[0],
+						'buy_eur': string[2],
+						'buy_gbp': string[6],
 						'buy_rub': 0,
-						'sell_usd': string[5],
-						'sell_eur': string[7],
-						'sell_gbp': 0,
+						'sell_usd': string[1],
+						'sell_eur': string[3],
+						'sell_gbp': string[7],
 						'sell_rub': 0,
 					}]
 				};
 
-				require('fs').readFile(__dirname + '/../data/azerturkbank_rates.json', function(err, data) {
-					if (!err) {
-						var fileContent = JSON.parse(data.toString());
-						var oldData = JSON.stringify(fileContent.azerturkbank[1]);
-						var newData = JSON.stringify(rates.azerturkbank[1]);
-						if (oldData != newData) {
-							require('fs').writeFile(__dirname + '/../data/azerturkbank_rates.json', JSON.stringify(rates), function(err) {
-								if (err) throw err;
-								console.log(timestamp + '\tGetRates:\tAzerTurkBank rates are saved!');
-							});
-						}
-						else {
-							console.log(timestamp + '\tGetRates:\tAzerTurkBank rates has not been changed.');
-						}
-					}
-					else {
-						require('fs').writeFile(__dirname + '/../data/azerturkbank_rates.json', JSON.stringify(rates), function(err) {
-							if (err) throw err;
-							console.log(timestamp + '\tGetRates:\tAzerTurkBank rates are saved!');
-						});
-					}
-				});
+				var readFile = require(__dirname + '/ratesReadFile.js');
+				readFile('azerturkbank', rates, timestamp, callback);
 			}
 			catch (err) {
 				console.log(timestamp + '\tGetRates:\tAzerTurkBank rates ERROR ' + err);
-				// require('fs').unlink(__dirname + '/../data/azerturkbank_rates.json', function(err) {
-				// 	if (err)
-				// 		if (err.code !== 'ENOENT') console.log(err);
-				// });
+				callback();
 			}
 		});
 	});
 
 	req.on('error', function(e) {
 		console.error(e);
+		callback();
 	});
 
 	req.end();

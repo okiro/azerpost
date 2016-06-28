@@ -9,6 +9,12 @@ html {
 	font-weight: normal;
 	font-style: italic;
 }
+
+.time {
+	font-weight: normal;
+	font-style: italic;
+	font-size: small;
+}
 .table>thead>tr>td,
 .table>tbody>tr>td,
 .table>tfoot>tr>td {

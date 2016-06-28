@@ -1,7 +1,9 @@
 /*jslint node: true, asi: true */
 'use strict';
 var fs = require('fs');
-module.exports = function concatenateRates() {
+var timestamp;
+module.exports = function concatenateRates(_timestamp) {
+	timestamp = _timestamp;
 	deleteFile('/rates.json', deleteFile('/../public/data/rates.json', readDir));
 }
 
@@ -23,7 +25,7 @@ function readDir() {
 function filesLoop(files) {
 	files.forEach(function(currentValue, index, array) {
 		if (require('path').extname(currentValue) === '.json') {
-			fs.readFile(__dirname + '/data/' + currentValue, function(err, data) {
+			fs.readFile(__dirname + '/data/' + currentValue, function ReadingEachFile(err, data) {
 				if (err) throw err;
 				fs.writeFile(__dirname + '/rates.json', data.toString(), {
 					flag: 'a'
@@ -37,6 +39,7 @@ function filesLoop(files) {
 								flag: 'w'
 							}, function(err) {
 								if (err) throw err;
+								console.log(timestamp + '\tFile Merge:\tRates concatenation is done.');
 							});
 						});
 					}
