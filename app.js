@@ -9,7 +9,7 @@ if (isNaN(portNumber)) portNumber = 8080;
 
 http.createServer(function(request, response) {
   if (request.method === 'GET') {
-    getContent(request.url, response, __dirname);
+    getContent(request, response, __dirname);
   }
   request.on('end', function() {
     //console.log(formatDate(new Date()) + '\tReguest:\t' + request.method + ' URL:' + request.url);
@@ -20,7 +20,7 @@ console.log('Server running at http://', process.env.IP, ':', portNumber);
 
 // Rates query
 var ratesIba = require(__dirname + '/functions/getRates/ratesIba');
-var ratesBanktechnique = require(__dirname + '/functions/getRates/ratesBankTechnique');
+// var ratesBanktechnique = require(__dirname + '/functions/getRates/ratesBankTechnique');
 var ratesKapitalBank = require(__dirname + '/functions/getRates/ratesKapitalBank');
 var ratesBankStandard = require(__dirname + '/functions/getRates/ratesBankStandard');
 var ratesBankOfBaku = require(__dirname + '/functions/getRates/ratesBankOfBaku');
@@ -33,12 +33,12 @@ var concatenateRates = require(__dirname + '/functions/concatenateRates');
 function getRates() {
   
   var timestamp = formatDate(new Date());
-  ratesIba(timestamp, next1);
+  ratesIba(timestamp, next2);
   
-  function next1(){
-    var timestamp = formatDate(new Date());
-    ratesBanktechnique(timestamp, next2);
-  }
+  // function next1(){
+  //   var timestamp = formatDate(new Date());
+  //   ratesBanktechnique(timestamp, next2);
+  // }
   
   function next2(){
     var timestamp = formatDate(new Date());
